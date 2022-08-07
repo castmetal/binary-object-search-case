@@ -98,7 +98,7 @@ function getArrayExampleOLogN(): Student[] {
   return arrayExample;
 }
 
-async function findStudentByBinaryTree(
+async function findStudentByBinarySearch(
   data: Student[],
   name: string,
   actualDepth?: number,
@@ -124,14 +124,14 @@ async function findStudentByBinaryTree(
     const rightBranch = data.slice(middlePosition, arrayLength - 1);
 
     const findStudent = await Promise.all([
-      await findStudentByBinaryTree(
+      await findStudentByBinarySearch(
         leftBranch,
         name,
         actualDepthInside + 1,
         studentFounded,
         originalLeftPosition
       ),
-      await findStudentByBinaryTree(
+      await findStudentByBinarySearch(
         rightBranch,
         name,
         actualDepthInside + 1,
@@ -168,13 +168,13 @@ async function findStudentByBinaryTree(
 async function main() {
   const studentsArray1 = getArrayExampleO1();
 
-  const student1 = await findStudentByBinaryTree(studentsArray1, "Aldair");
+  const student1 = await findStudentByBinarySearch(studentsArray1, "Aldair");
 
   console.log("Result1: ", student1);
 
   const studentsArray2 = getArrayExampleOLogN();
 
-  const student2 = await findStudentByBinaryTree(studentsArray2, "André");
+  const student2 = await findStudentByBinarySearch(studentsArray2, "André");
 
   console.log("Result2: ", student2);
 }
